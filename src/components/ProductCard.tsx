@@ -10,6 +10,9 @@ interface ProductCardProps {
   metal: string;
   description: string;
   inStock: boolean;
+  gemstone: string;
+  certificate: string;
+  sizes: string[];
 }
 
 const ProductCard = ({
@@ -19,6 +22,9 @@ const ProductCard = ({
   metal,
   description,
   inStock,
+  gemstone,
+  certificate,
+  sizes,
 }: ProductCardProps) => {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 border border-gold/20 hover:border-gold/40">
@@ -60,12 +66,44 @@ const ProductCard = ({
             <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
           </div>
 
+          {/* Gemstone info */}
+          <div className="flex items-center space-x-2">
+            <Icon name="Gem" size={16} className="text-gold" />
+            <span className="text-sm text-gray-600">{gemstone}</span>
+          </div>
+
           {/* Metal info */}
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 gold-gradient rounded-full"></div>
             <span className="text-sm font-medium text-dark-elegant">
               {metal}
             </span>
+          </div>
+
+          {/* Certificate */}
+          <div className="flex items-center space-x-2">
+            <Icon name="Award" size={16} className="text-gold" />
+            <span className="text-xs text-gray-500">{certificate}</span>
+          </div>
+
+          {/* Sizes */}
+          <div className="space-y-1">
+            <span className="text-xs text-gray-500">Доступные размеры:</span>
+            <div className="flex flex-wrap gap-1">
+              {sizes.slice(0, 3).map((size, index) => (
+                <span
+                  key={index}
+                  className="text-xs bg-gold/10 text-gold px-2 py-1 rounded"
+                >
+                  {size}
+                </span>
+              ))}
+              {sizes.length > 3 && (
+                <span className="text-xs text-gray-400">
+                  +{sizes.length - 3}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Price and actions */}
